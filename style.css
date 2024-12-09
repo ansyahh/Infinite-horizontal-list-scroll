@@ -1,0 +1,78 @@
+:root {
+    --dark: #252A2E;
+    --light: #F5F5F5;
+    --background: var(--light);
+    --text: var(--dark);
+    --border: var(--dark);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background: var(--dark);
+        --text: var(--light);
+        --border: var(--light);
+    }
+}
+
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    display: grid;
+    min-block-size: 100vh;
+    place-content: center;
+    background: var(--background);
+    color: var(--text);
+}
+
+.tag-scrollers {
+    width: 100%;
+    max-width: 1200px;
+    overflow: hidden;
+}
+
+.tag-scroller {
+    display: grid;
+    gap: 1.5rem;
+    mask: linear-gradient(90deg, #0000, var(--background) 15%, var(--background) 85%, #0000);
+}
+
+.tag-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.tag-list li {
+    font-family: system-ui;
+    font-size: 1.125rem;
+    line-height: 1;
+    padding: 0.625rem 1.375rem;
+    border: 2px solid var(--border);
+    border-radius: 10ch;
+    white-space: nowrap;
+}
+
+.tag-scroller.scrolling .tag-list {
+    width: max-content;
+    flex-wrap: nowrap;
+    animation: horizontal-scroll var(--duration) var(--direction, normal) linear infinite;
+}
+
+.tag-scroller:hover .tag-list {
+    animation-play-state: paused;
+}
+
+@keyframes horizontal-scroll {
+    to {
+        transform: translateX(calc(-50% - 0.75rem));
+    }
+}
